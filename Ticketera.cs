@@ -20,8 +20,8 @@ static class Ticketera{
         }
     }
     static public bool CambiarEntrada(int ID, int tipo, int cantidad){
-        int nuevoImporte = 0;
-        if(TicketOpc[tipo - 1] < nuevoImporte){
+        int viejoImporte = TicketOpc[DicClientes[ID].TipoEntrada - 1];
+        if(TicketOpc[tipo - 1] < viejoImporte){
             DicClientes[ID].TipoEntrada = tipo;
             DicClientes[ID].Cantidad = cantidad;
             return true;
@@ -34,8 +34,18 @@ static class Ticketera{
         List<string> info = new List<string>();
         int[] CantTickets = new int[4];
         int[] RecaudacionTickets = new int[4];
-        
         int plataTotal = 0;
+        for (int opcion = 0; opcion < CantTickets.Length; opcion++)
+        {
+            foreach (Cliente tipoTicket in DicClientes.Values)
+            {
+                if (tipoTicket.TipoEntrada == opcion + 1)
+                {
+                    CantTickets[opcion] += tipoTicket.Cantidad;
+                    RecaudacionTickets[opcion] += TicketOpc[opcion];
+                }
+            }
+        }
         info.Add("Cantidad de clientes: " + DicClientes.Count);
         for (int i = 0; i < CantTickets.Length - 1; i++)
         {

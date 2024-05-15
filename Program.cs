@@ -15,7 +15,7 @@ class Program
             Console.Clear();
             switch (opcion){
                 case 1:
-                    int DNI, tipo, cantidad;
+                    int DNI, tipo, cantidad, ID;
                     string apellido, nombre;
                     do
                     {
@@ -25,7 +25,7 @@ class Program
                         } while (DNI < 1 || DNI > 60000000);
                         apellido = Ingreso.IngresarString("Ingresa el apellido");
                         nombre = Ingreso.IngresarString("Ingrese el nombre");
-                        tipo = Ingreso.IngresarInt("Ingrese uno de las siguientes opciones:\n  Opción 1(Día 1 / $45000)\n  Opción 2(Día 2 / $60000)\n  Opción 3(Día 3 / $30000)\n  Opción Full Pass(Todos los Días/ $100000)");
+                        tipo = Ingreso.IngresarInt("Ingrese uno de las siguientes opciones:\n  Opción 1 (Día 1 / $45000)\n  Opción 2 (Día 2 / $60000)\n  Opción 3 (Día 3 / $30000)\n  Opción Full Pass[4] (Todos los Días/ $100000)");
                         cantidad = Ingreso.IngresarInt("Ingresa la cantidad de entradas que queres comprar");
                         confirmacion = Ingreso.IngresarString("¿Es lo ingresado correcto? Ingrese 's' para continuar").ToLower();
                     } while (confirmacion != "s");
@@ -47,7 +47,7 @@ class Program
                     }
                     break;
                 case 3:
-                    int ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
+                    ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
                     Cliente temp1 = Ticketera.BuscarCliente(ID);
                     if(temp1 == null)
                     {
@@ -60,7 +60,17 @@ class Program
                     Funciones.Continue();
                     break;
                 case 4:
-                    
+                    ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
+                    tipo = Ingreso.IngresarInt("Ingrese uno de las siguientes opciones:\n  Opción 1 (Día 1 / $45000)\n  Opción 2 (Día 2 / $60000)\n  Opción 3 (Día 3 / $30000)\n  Opción Full Pass[4] (Todos los Días/ $100000)");
+                    cantidad = Ingreso.IngresarInt("Ingresa la cantidad de entradas que queres comprar");
+                    if (Ticketera.CambiarEntrada(ID, tipo, cantidad))
+                    {
+                        Console.WriteLine("El cambio ha sido exitoso");
+                    }
+                    else
+                    {
+                        Console.WriteLine("El ID no esta registrado en la base de datos");
+                    }
                     Funciones.Continue();
                     break;
                 case 5:
