@@ -6,5 +6,10 @@ public class Funciones{
     Console.WriteLine("4. Cambiar entrada de un Cliente");
     Console.WriteLine("5. Salir");
     }
-    
+    public static void Continue(){
+        Console.CursorVisible = false;
+        Console.Write("Toque cualquier tecla para continuar");
+        Console.ReadKey();
+        Console.CursorVisible = true;
+    }
 }
