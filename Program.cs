@@ -11,6 +11,9 @@ class Program
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("InfoPalooza Menu\n");
+            Console.BackgroundColor = ConsoleColor.Black;
             Funciones.Menu();
             opcion = Ingreso.IngresarInt("Ingresa la opción");
             Console.Clear();
@@ -20,6 +23,9 @@ class Program
                     string apellido, nombre;
                     do
                     {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nueva Inscripción\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
                         do DNI = Ingreso.IngresarInt("Ingresa el DNI"); while (DNI < 1 || DNI > 60000000);
                         apellido = Ingreso.IngresarString("Ingresa el apellido");
                         nombre = Ingreso.IngresarString("Ingrese el nombre");
@@ -32,6 +38,9 @@ class Program
                     Funciones.Continue();
                     break;
                 case 2:
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Estadísticas\n");
+                    Console.BackgroundColor = ConsoleColor.Black;
                     estadisticas = Ticketera.EstadisticaTicketera();
                     if(estadisticas == null){
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -46,6 +55,9 @@ class Program
                     }
                     break;
                 case 3:
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Busqueda de cliente\n");
+                    Console.BackgroundColor = ConsoleColor.Black;
                     ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
                     Cliente temp1 = Ticketera.BuscarCliente(ID);
                     if(temp1 == null){
@@ -69,6 +81,9 @@ class Program
                     Funciones.Continue();
                     break;
                 case 4:
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Cambio de entrada\n");
+                    Console.BackgroundColor = ConsoleColor.Black;
                     ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
                     temp1 = Ticketera.BuscarCliente(ID);
                     if(temp1 == null){
@@ -92,6 +107,9 @@ class Program
                     Funciones.Continue();
                     break;
                 case 5:
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Listado\n");
+                    Console.BackgroundColor = ConsoleColor.Black;
                     Funciones.ImprimirListado(Ticketera.DevolverDic());
                     Funciones.Continue();
                     break;
