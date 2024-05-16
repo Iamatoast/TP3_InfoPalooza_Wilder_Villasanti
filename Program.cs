@@ -95,9 +95,13 @@ class Program
                     Funciones.Continue();
                     break;
                 case 5:
+                    Funciones.ImprimirListado(Ticketera.DevolverDic());
+                    Funciones.Continue();
+                    break;
+                case 6:
                     Console.WriteLine("Se cerró el Programa de InfoPalooza :)");
                     break;
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
     }
 }

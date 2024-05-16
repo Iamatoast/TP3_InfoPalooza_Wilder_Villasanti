@@ -3,6 +3,9 @@ static class Ticketera{
     static private int UltimoIDEntrada = 0;
     static private int[] TicketOpc = new int[]{45000, 60000, 30000, 100000};
     
+    static public Dictionary<int,Cliente> DevolverDic(){
+        return DicClientes;
+    }
     static public int DevolverUltimoID(){
         return UltimoIDEntrada;
     }
