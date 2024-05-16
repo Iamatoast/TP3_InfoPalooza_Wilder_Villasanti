@@ -8,6 +8,7 @@ public class Funciones{
     Console.WriteLine("6. Salir");
     }
     public static void Continue(){
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.CursorVisible = false;
         Console.Write("Toque cualquier tecla para continuar");
         Console.ReadKey();

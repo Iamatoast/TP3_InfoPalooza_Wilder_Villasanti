@@ -15,12 +15,8 @@ static class Ticketera{
         return UltimoIDEntrada;
     }
     static public Cliente BuscarCliente(int ID){
-        if(DicClientes.ContainsKey(ID)){
-            return DicClientes[ID];
-        } 
-        else {
-            return null;
-        }
+        if(DicClientes.ContainsKey(ID)) return DicClientes[ID];
+        else return null;
     }
     static public bool CambiarEntrada(int ID, int tipo, int cantidad){
         int viejoImporte = TicketOpc[DicClientes[ID].TipoEntrada - 1] * DicClientes[ID].Cantidad;
@@ -29,9 +25,7 @@ static class Ticketera{
             DicClientes[ID].Cantidad = cantidad;
             return true;
         }
-        else{
-            return false;
-        }
+        else return false;
     }
     static public List<string> EstadisticaTicketera(){
         List<string> info = new List<string>();
@@ -51,39 +45,18 @@ static class Ticketera{
             }
         }
         info.Add("Cantidad de clientes: " + DicClientes.Count);
-        for (int i = 0; i < CantTickets.Length - 1; i++)
-        {
-            info.Add($"Cantidad de entradas Opción {i + 1}: {CantTickets[i]}");
-        }
+        for (int i = 0; i < CantTickets.Length - 1; i++) info.Add($"Cantidad de entradas Opción {i + 1}: {CantTickets[i]}");
         info.Add($"Cantidad de entradas Opción Full: {CantTickets[3]}");
         for (int i = 0; i < CantTickets.Length - 1; i++)
         {
-            if (CantTickets[i] != 0)
-            {
-                info.Add($"Porcentaje Opción {i + 1}: {CantTickets[i] / cantTicketsMax * 100}%");
-            }
-            else
-            {
-                info.Add($"Ninguna persona compró entradas de la opción {i + 1}");
-            }
+            if (CantTickets[i] != 0) info.Add($"Porcentaje Opción {i + 1}: {CantTickets[i] / cantTicketsMax * 100}%");
+            else info.Add($"Ninguna persona compró entradas de la opción {i + 1}");
         }
-        if (CantTickets[3] != 0)
-        {
-            info.Add($"Porcentaje Opción Full: {CantTickets[3] / cantTicketsMax * 100}%");
-        }
-        else
-        {
-            info.Add($"Ninguna persona compro entradas de la opción Full Pass");
-        }
-        for (int i = 0; i < RecaudacionTickets.Length - 1; i++)
-        {
-            info.Add($"Recaudacion Opción {i + 1}: {RecaudacionTickets[i]}");
-        }
+        if (CantTickets[3] != 0) info.Add($"Porcentaje Opción Full: {CantTickets[3] / cantTicketsMax * 100}%");
+        else info.Add($"Ninguna persona compro entradas de la opción Full Pass");
+        for (int i = 0; i < RecaudacionTickets.Length - 1; i++) info.Add($"Recaudacion Opción {i + 1}: {RecaudacionTickets[i]}");
         info.Add($"Recaudacion Opción Full: {RecaudacionTickets[3]}");
-        foreach (int plata in RecaudacionTickets)
-        {
-            plataTotal += plata;
-        }
+        foreach (int plata in RecaudacionTickets) plataTotal += plata;
         info.Add($"Recaudación total: {plataTotal}");
         return info;
     }

@@ -9,6 +9,7 @@ class Program
         List<string> estadisticas = new List<string>();
         do
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Clear();
             Funciones.Menu();
             opcion = Ingreso.IngresarInt("Ingresa la opción");
@@ -19,17 +20,11 @@ class Program
                     string apellido, nombre;
                     do
                     {
-                        do
-                        {
-                            DNI = Ingreso.IngresarInt("Ingresa el DNI");
-                        } while (DNI < 1 || DNI > 60000000);
+                        do DNI = Ingreso.IngresarInt("Ingresa el DNI"); while (DNI < 1 || DNI > 60000000);
                         apellido = Ingreso.IngresarString("Ingresa el apellido");
                         nombre = Ingreso.IngresarString("Ingrese el nombre");
                         tipo = Ingreso.IngresarInt("Ingrese uno de las siguientes opciones:\n  Opción 1 (Día 1 / $45000)\n  Opción 2 (Día 2 / $60000)\n  Opción 3 (Día 3 / $30000)\n  Opción Full Pass[4] (Todos los Días/ $100000)");
-                        do
-                        {
-                            cantidad = Ingreso.IngresarInt("Ingresa la cantidad de entradas que querés comprar");
-                        } while (cantidad <= 0);
+                        do cantidad = Ingreso.IngresarInt("Ingresa la cantidad de entradas que querés comprar"); while (cantidad <= 0);
                         confirmacion = Ingreso.IngresarString("¿Es lo ingresado correcto? Ingrese 's' para continuar").ToLower();
                     } while (confirmacion != "s");
                     Cliente temp = new Cliente(DNI, apellido, nombre, tipo, cantidad);
@@ -39,8 +34,9 @@ class Program
                 case 2:
                     estadisticas = Ticketera.EstadisticaTicketera();
                     if(estadisticas == null){
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Aun no se anotó nadie");
-                    }
+                    } 
                     else{
                         foreach (string txt in estadisticas)
                         {
@@ -52,10 +48,10 @@ class Program
                 case 3:
                     ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
                     Cliente temp1 = Ticketera.BuscarCliente(ID);
-                    if(temp1 == null)
-                    {
+                    if(temp1 == null){
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("El ID no esta registrado en la base de datos");
-                    }
+                    } 
                     else
                     {
                         Console.WriteLine($"El DNI del cliente es: {temp1.DNI}");
@@ -75,10 +71,10 @@ class Program
                 case 4:
                     ID = Ingreso.IngresarInt("Ingrese el ID del cliente");
                     temp1 = Ticketera.BuscarCliente(ID);
-                    if(temp1 == null)
-                    {
+                    if(temp1 == null){
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("El ID no esta registrado en la base de datos");
-                    }
+                    } 
                     else
                     {
                         tipo = Ingreso.IngresarInt("Ingrese uno de las siguientes opciones:\n  Opción 1 (Día 1 / $45000)\n  Opción 2 (Día 2 / $60000)\n  Opción 3 (Día 3 / $30000)\n  Opción Full Pass[4] (Todos los Días/ $100000)");
@@ -89,6 +85,7 @@ class Program
                         }
                         else
                         {
+                            Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("El cambio no pudo ser realizado; el aporte debe ser mayor a tu aporte anterior");
                         }
                     }
@@ -99,6 +96,7 @@ class Program
                     Funciones.Continue();
                     break;
                 case 6:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Se cerró el Programa de InfoPalooza :)");
                     break;
             }
