@@ -1,2 +1,3 @@
 # TP3_InfoPalooza_Wilder_Villasanti
-Esta Repo es temporal (por ahora) hasta que pueda vincular la cuenta de ort a esta (o direcatmente haga una nueva con esa)
+Repositorio con el TP3 de programación
+(Trabajo hecho en una sola computadora)
