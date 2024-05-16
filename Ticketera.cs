@@ -1,7 +1,7 @@
 static class Ticketera{
     static private Dictionary<int,Cliente> DicClientes = new Dictionary<int, Cliente>();
     static private int UltimoIDEntrada = 0;
-    static private int[] TicketOpc = new int[]{45000, 60000, 30000, 1000000};
+    static private int[] TicketOpc = new int[]{45000, 60000, 30000, 100000};
     
     static public int DevolverUltimoID(){
         return UltimoIDEntrada;
@@ -20,8 +20,8 @@ static class Ticketera{
         }
     }
     static public bool CambiarEntrada(int ID, int tipo, int cantidad){
-        int viejoImporte = TicketOpc[DicClientes[ID].TipoEntrada - 1];
-        if(TicketOpc[tipo - 1] < viejoImporte){
+        int viejoImporte = TicketOpc[DicClientes[ID].TipoEntrada - 1] * DicClientes[ID].Cantidad;
+        if(TicketOpc[tipo - 1] * cantidad > viejoImporte){
             DicClientes[ID].TipoEntrada = tipo;
             DicClientes[ID].Cantidad = cantidad;
             return true;
@@ -32,9 +32,9 @@ static class Ticketera{
     }
     static public List<string> EstadisticaTicketera(){
         List<string> info = new List<string>();
-        int[] CantTickets = new int[4];
+        double[] CantTickets = new double[4];
         int[] RecaudacionTickets = new int[4];
-        int plataTotal = 0;
+        int plataTotal = 0, cantTicketsMax = 0;
         for (int opcion = 0; opcion < CantTickets.Length; opcion++)
         {
             foreach (Cliente tipoTicket in DicClientes.Values)
@@ -42,31 +42,46 @@ static class Ticketera{
                 if (tipoTicket.TipoEntrada == opcion + 1)
                 {
                     CantTickets[opcion] += tipoTicket.Cantidad;
-                    RecaudacionTickets[opcion] += TicketOpc[opcion];
+                    cantTicketsMax += tipoTicket.Cantidad;
+                    RecaudacionTickets[opcion] += TicketOpc[opcion] * tipoTicket.Cantidad;
                 }
             }
         }
         info.Add("Cantidad de clientes: " + DicClientes.Count);
         for (int i = 0; i < CantTickets.Length - 1; i++)
         {
-            info.Add($"Cantidad de entradas Opcion {i + 1}: {CantTickets[i]}");
+            info.Add($"Cantidad de entradas Opción {i + 1}: {CantTickets[i]}");
         }
-        info.Add($"Cantidad de entradas Opcion Full: {CantTickets[3]}");
+        info.Add($"Cantidad de entradas Opción Full: {CantTickets[3]}");
         for (int i = 0; i < CantTickets.Length - 1; i++)
         {
-            info.Add($"Porcentaje Opcion {i + 1}: {CantTickets.Length / CantTickets[i]}");
+            if (CantTickets[i] != 0)
+            {
+                info.Add($"Porcentaje Opción {i + 1}: {CantTickets[i] / cantTicketsMax * 100}%");
+            }
+            else
+            {
+                info.Add($"Ninguna persona compró entradas de la opción {i + 1}");
+            }
         }
-        info.Add($"Porcentaje Opcion Full: {CantTickets.Length / CantTickets[3]}");
+        if (CantTickets[3] != 0)
+        {
+            info.Add($"Porcentaje Opción Full: {CantTickets[3] / cantTicketsMax * 100}%");
+        }
+        else
+        {
+            info.Add($"Ninguna persona compro entradas de la opción Full Pass");
+        }
         for (int i = 0; i < RecaudacionTickets.Length - 1; i++)
         {
-            info.Add($"Recaudacion Opcion {i + 1}: {RecaudacionTickets[i]}");
+            info.Add($"Recaudacion Opción {i + 1}: {RecaudacionTickets[i]}");
         }
-        info.Add($"Recaudacion Opcion Full: {RecaudacionTickets[3]}");
+        info.Add($"Recaudacion Opción Full: {RecaudacionTickets[3]}");
         foreach (int plata in RecaudacionTickets)
         {
             plataTotal += plata;
         }
-        info.Add($"Recaudacion total: {plataTotal}");
+        info.Add($"Recaudación total: {plataTotal}");
         return info;
     }
 }
